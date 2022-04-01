@@ -3,6 +3,7 @@ import React from "react";
 import "./ReviewItem.css";
 
 const ReviewItem = (props) => {
+  const { product, handleRemoveProduct } = props;
   const { name, img, price, shipping, quantity } = props.product;
   return (
     <div className="review-items">
@@ -24,8 +25,8 @@ const ReviewItem = (props) => {
           </p>
         </div>
         <div className="delete-container">
-          <button>
-            <i class="fa-solid fa-trash-can"></i>
+          <button onClick={() => handleRemoveProduct(product)}>
+            <i className="fa-solid fa-trash-can"></i>
           </button>
         </div>
       </div>
