@@ -1,0 +1,43 @@
+.login {
+  padding: 30px 50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.login-btn {
+  background: rgb(255, 147, 30);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 147, 30, 1) 0%,
+    rgba(244, 175, 13, 0.8015581232492998) 35%,
+    rgba(255, 213, 0, 0.904) 100%
+  );
+  border: none;
+  width: 100%;
+}
+
+.login-btn:hover {
+  background-color: rgb(226, 119, 19);
+}
+
+.line {
+  width: 300px;
+  border-bottom: 2px solid rgb(76, 129, 76);
+}
+
+.google-btn {
+  width: 100%;
+  background-color: transparent;
+  color: #000;
+  border: 1px solid black;
+}
+
+.google-btn:focus {
+  background-color: #000;
+  color: aliceblue;
+  outline: none;
+}
+
+.google-btn:hover {
+  background-color: #000;
+  color: aliceblue;
+}
