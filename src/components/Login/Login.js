@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import auth from "../../firebase.init";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +20,8 @@ const Login = () => {
 
   const [signInWithEmailAndPassword, user] =
     useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -33,6 +41,14 @@ const Login = () => {
       console.log(user);
     });
     event.preventDefault();
+  };
+
+  //continue with GoogleSignIn
+  const handleSignInWithGoogle = (event) => {
+    signInWithPopup(auth, provider).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
 
   return (
@@ -77,7 +93,7 @@ const Login = () => {
               </div>
             </Form>
             <Button
-              //   onClick={signInWithGoogle}
+              onClick={handleSignInWithGoogle}
               className="google-btn mt-3"
               type="submit"
             >

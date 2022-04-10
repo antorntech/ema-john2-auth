@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Shipment = () => {
+  const [user] = useAuthState(auth);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -14,16 +17,18 @@ const Shipment = () => {
     setName(event.target.value);
   };
 
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
   const handleAddress = (event) => {
     setAddress(event.target.value);
   };
 
   const handlePhone = (event) => {
     setPhone(event.target.value);
+  };
+
+  const handleShipping = (event) => {
+    event.preventDefault();
+    const shipping = { name, email, address, phone };
+    console.log(shipping);
   };
 
   return (
@@ -34,7 +39,7 @@ const Shipment = () => {
             <header className="text-center mb-5">
               <h2>Shipping Information</h2>
             </header>
-            <Form>
+            <Form onSubmit={handleShipping}>
               <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Label>Your Name</Form.Label>
                 <Form.Control
@@ -48,9 +53,10 @@ const Shipment = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Your Email</Form.Label>
                 <Form.Control
-                  onBlur={handleEmail}
                   type="email"
                   placeholder="email"
+                  value={user?.email}
+                  readOnly
                   required
                 />
               </Form.Group>
