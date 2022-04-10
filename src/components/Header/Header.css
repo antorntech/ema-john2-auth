@@ -1,19 +1,37 @@
-.header{
-    height: 80px;
-    background-color: #1C2B35;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 140px;
-    padding-right: 140px;
+.header-main {
+  background-color: #1c2b35;
 }
 
-.header a{
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 17px;
-    margin-left: 36px;
+.header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.header a:hover{
-    color: orange;
+
+.header a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 15px;
+}
+.header a:hover {
+  color: orange;
+}
+
+.signOut-btn {
+  border: none;
+  background: orange;
+  width: 80px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.signOut-btn:hover {
+  background: rgb(255, 136, 0);
+}
+
+.signOut-btn:focus {
+  border: none;
+  outline: none;
 }
