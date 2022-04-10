@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import auth from "../../firebase.init";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const [signInWithEmailAndPassword, user] =
+    useSignInWithEmailAndPassword(auth);
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  if (user) {
+    navigate("/shop");
+  }
+
+  const handleSignIn = (event) => {
+    signInWithEmailAndPassword(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
+    event.preventDefault();
+  };
+
   return (
     <div className="container">
       <div className="row w-50 mx-auto text-start mt-4">
@@ -12,15 +41,25 @@ const Login = () => {
             <header className="text-center mb-5">
               <h2>Please Login</h2>
             </header>
-            <Form>
+            <Form onSubmit={handleSignIn}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" required />
+                <Form.Control
+                  onBlur={handleEmail}
+                  type="email"
+                  placeholder="Enter email"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" required />
+                <Form.Control
+                  onBlur={handlePassword}
+                  type="password"
+                  placeholder="Password"
+                  required
+                />
               </Form.Group>
               <Button className="login-btn" type="submit">
                 Login
